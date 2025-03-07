@@ -18,7 +18,13 @@ class ArticleController extends Controller
         ]);
     }
 
-    public function details(){
-        return view("client.articles-show");
+    public function details(string $slug)
+    {
+        //dd($slug);
+
+        $article = Articles::where('slug', '=', $slug)->first();
+        return view("client.articles-show", [
+            'article' => $article
+        ]);
     }
 }
