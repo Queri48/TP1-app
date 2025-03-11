@@ -1,41 +1,34 @@
 <?php
 
+use App\Http\Controllers\admin\ArticleController as AdminArticleController;
+use App\Http\Controllers\admin\ContactController as AdminContactController;
+use App\Http\Controllers\admin\HomeController as AdminHomeController;
 use App\Http\Controllers\client\ArticleController;
 use App\Http\Controllers\client\CategorieController;
 use App\Http\Controllers\client\ContactController;
 use App\Http\Controllers\client\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/admin', function () {
-    return view("admin.home");
-});
+Route::get('/admin/accueil', [AdminHomeController::class, 'accueil'])->name('admin.accueil');
 
 
-Route::get('/admin/articles/ajouter', function () {
-    return view("admin.articles.create");
-});
+Route::get('/admin/articles/ajouter', [AdminArticleController::class, 'ajouter'])->name('admin.articles.ajouter');
 
-Route::get('/admin/articles/modifier', function () {
-    return view("admin.articles.edit");
-});
+Route::post('/admin/articles/ajouter/traitement', [AdminArticleController::class, 'ajouter_traitement'])->name('admin.articles.ajouter.traitement');
 
-Route::get('/admin/articles/liste', function () {
-    return view("admin.articles.list");
-});
+Route::get('/admin/articles/modifier/{id}', [AdminArticleController::class, 'modifier'])->name('admin.articles.modifier');
 
-Route::get('/admin/articles/detail', function () {
-    return view("admin.articles.show");
-});
+Route::post('/admin/articles/modifier/traitement/{id}', [AdminArticleController::class, 'modifier_traitement'])->name('admin.articles.modifier_traitement');
+
+Route::get('/admin/articles/liste', [AdminArticleController::class, 'liste'])->name('admin.articles.liste');
+
+Route::get('/admin/articles/detail', [AdminArticleController::class, 'detail'])->name('admin.articles.detail');
 
 
 
-Route::get('/admin/contact/liste', function () {
-    return view("admin.contact.list");
-});
+Route::get('/admin/contact/liste', [AdminContactController::class, 'liste'])->name('admin.contact.liste');
 
-Route::get('/admin/contact/detail', function () {
-    return view("admin.contact.show");
-});
+Route::get('/admin/contact/detail', [AdminContactController::class, 'detail'])->name('admin.contact.detail');
 
 
 
